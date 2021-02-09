@@ -2,16 +2,15 @@ from fastapi import FastAPI
 from tortoise import Tortoise
 
 from app.routes.v1.v1_router import v1_router
-from app.settings.settings import Settings
+from utils.config_connection_tortoise import config_connection_tortoise
 
 app = FastAPI(title="Automated Garden", version="0.1.0")
 
 
 @app.on_event('startup')
-async def on_startup():
+async def on_startup_fast_api():
     await Tortoise.init(
-        db_url=Settings().DATABASE_URL,
-        modules={'models': ['app.models.sensor']},
+        config=config_connection_tortoise()
     )
     await Tortoise.generate_schemas()
 
