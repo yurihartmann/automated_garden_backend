@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from starlette.responses import RedirectResponse
+from starlette.status import HTTP_303_SEE_OTHER
 from tortoise import Tortoise
 
 from app.routes.v1.v1_router import v1_router
@@ -24,6 +26,11 @@ app.include_router(
     v1_router,
     prefix='/v1'
 )
+
+
+@app.get('/')
+def home():
+    return RedirectResponse(url="/docs", status_code=HTTP_303_SEE_OTHER)
 
 
 @app.get('/hc')
