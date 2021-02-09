@@ -12,10 +12,12 @@ class Settings(metaclass=SingletonMeta):
     DATABASE_USER = os.getenv("DATABASE_USER")
     DATABASE_PASS = os.getenv("DATABASE_PASS")
     DATABASE_NAME = os.getenv("DATABASE_NAME")
+    API_URL = os.getenv("API_URL")
     MODELS_TORTOISE = ["app.models.sensor", "app.models.history_reading_soil_moisture_sensor",
                        "app.models.history_reading_weather_sensor"]
 
     def __init__(self):
+        self.validate_api_url()
         if self.ENVIRONMENT == "DEV":
             self.validate_database_url()
         else:
@@ -48,3 +50,7 @@ class Settings(metaclass=SingletonMeta):
     def validate_database_name(self):
         if self.DATABASE_NAME is None:
             raise ValueError("DATABASE_NAME should be not empty")
+
+    def validate_api_url(self):
+        if self.API_URL is None:
+            raise ValueError("API_URL should be not empty")

@@ -2,3 +2,6 @@ uvicorn
 fastapi
 tortoise-orm
 asyncpg
+starlette
+requests
+APScheduler
