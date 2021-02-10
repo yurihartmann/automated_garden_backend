@@ -1,4 +1,4 @@
-SYNC DATA
+=-=-=-==-=-=-=-= SYNC DATA - (The ES32 will connect in this routes) =-=-=-==-=-=-=-=
 
 WEBSOCKET /mode/sync
     - EXPECT TO RECEIVE:  "MODE:AUTO" or "MODE:MANUAL"
@@ -6,16 +6,35 @@ WEBSOCKET /mode/sync
     - SEND_FOR_WS_THAT_RECEIVE: "MODE:XXXX"
     - SEND_FOR_ALL: "MODE:XXXX"
 
-WEBSOCKET /weather/sync -> READY
+WEBSOCKET /weather/sync
     - EXPECT TO RECEIVE:  "HUMIDITY:70|TEMPERATURE:24"
-
-    - SEND_FOR_ALL: {"humidity": XX, "temperature": XX}
 
 WEBSOCKET /sensors/sync
     - EXPECT TO RECEIVE:  "SOIL_MOISTURE:64"
 
-    - SEND_FOR_ALL: {"soil_moisture": XX}
+WEBSOCKET /irriganting/sync
+    - EXPECT TO RECEIVE:  "IRRIGATING:TRUE" or "IRRIGATING:FALSE"
+
+    - SEND_FOR_ALL: "IRRIGATING:TRUE" or "IRRIGATING:FALSE"
 
 
-WEBSOCKET /irrigate/sync
-    - SEND_FOR_ALL: "IRRIGATE"
+=-=-=-==-=-=-=-= STATE - (The frontend will connect in this routes) =-=-=-==-=-=-=-=
+
+WEBSOCKET /mode/state
+    - EXPECT TO RECEIVE:  {"mode": "XXXX"}
+
+    - SEND_FOR_WS_THAT_RECEIVE: {"mode": "XXXX"}
+    - SEND_FOR_ALL: {"mode": "XXXX"}
+
+WEBSOCKET /weather/state
+    - SEND_FOR_WS_THAT_RECEIVE: {"humidity": XX, "tempoerature": XX}
+    - SEND_FOR_ALL: {"humidity": XX, "tempoerature": XX}
+
+WEBSOCKET /sensors/state
+    - SEND_FOR_WS_THAT_RECEIVE: {"soil_mositure": XX}
+    - SEND_FOR_ALL: {"soil_mositure": XX}
+
+WEBSOCKET /irriganting/state
+    - SEND_FOR_WS_THAT_RECEIVE: {"irrigating": True} or {"irrigating": False}
+    - SEND_FOR_ALL: {"irrigating": True} or {"irrigating": False}
+    
