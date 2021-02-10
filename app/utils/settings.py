@@ -1,6 +1,6 @@
 import os
 
-from utils.singleton import SingletonMeta
+from app.utils.singleton import SingletonMeta
 
 
 class Settings(metaclass=SingletonMeta):

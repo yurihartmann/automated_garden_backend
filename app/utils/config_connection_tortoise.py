@@ -1,6 +1,6 @@
 import ssl
-from app.settings.settings import Settings
-from utils.logger import logger
+from app.utils.settings import Settings
+from app.utils.logger import logger
 
 
 def config_connection_tortoise():

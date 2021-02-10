@@ -1,0 +1,21 @@
+SYNC DATA
+
+WEBSOCKET /mode/sync
+    - EXPECT TO RECEIVE:  "MODE:AUTO" or "MODE:MANUAL"
+
+    - SEND_FOR_WS_THAT_RECEIVE: "MODE:XXXX"
+    - SEND_FOR_ALL: "MODE:XXXX"
+
+WEBSOCKET /weather/sync -> READY
+    - EXPECT TO RECEIVE:  "HUMIDITY:70|TEMPERATURE:24"
+
+    - SEND_FOR_ALL: {"humidity": XX, "temperature": XX}
+
+WEBSOCKET /sensors/sync
+    - EXPECT TO RECEIVE:  "SOIL_MOISTURE:64"
+
+    - SEND_FOR_ALL: {"soil_moisture": XX}
+
+
+WEBSOCKET /irrigate/sync
+    - SEND_FOR_ALL: "IRRIGATE"
